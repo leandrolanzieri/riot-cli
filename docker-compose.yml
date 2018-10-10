@@ -1,0 +1,13 @@
+version: "3"
+services:
+    riotcli:
+        image: "riotcli:dev"
+        build:
+            context: .
+            dockerfile: Dockerfile
+        hostname: riotcli
+        stdin_open: true
+        tty: true
+        working_dir: '/riotcli-dev'
+        volumes:
+            - ".:/riotcli-dev"
