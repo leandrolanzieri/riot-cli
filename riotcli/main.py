@@ -4,11 +4,11 @@ from cement.core.exc import CaughtSignal
 from .core.exc import RiotCliError
 from .controllers.base import Base
 from .controllers.config import Config
+from .controllers.utils import Utils
 
 # configuration defaults
 CONFIG = init_defaults('todo')
 CONFIG['todo']['foo'] = 'bar'
-
 
 class RiotCli(App):
     """RIOT CLI primary application."""
@@ -27,6 +27,7 @@ class RiotCli(App):
             'yaml',
             'colorlog',
             'jinja2',
+            'json'
         ]
 
         # configuration handler
@@ -44,7 +45,8 @@ class RiotCli(App):
         # register handlers
         handlers = [
             Base,
-            Config
+            Config,
+            Utils
         ]
 
 

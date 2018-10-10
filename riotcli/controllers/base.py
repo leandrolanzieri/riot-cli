@@ -16,9 +16,6 @@ class Base(Controller):
         # text displayed at the top of --help output
         description = 'CLI tool for RIOT OS'
 
-        # text displayed at the bottom of --help output
-        epilog = 'Usage: riotcli command1 --foo bar'
-
         # controller level arguments. ex: 'riotcli --version'
         arguments = [
             ### add a version banner
