@@ -3,6 +3,7 @@ from cement import App, TestApp, init_defaults
 from cement.core.exc import CaughtSignal
 from .core.exc import RiotCliError
 from .controllers.base import Base
+from .controllers.config import Config
 
 # configuration defaults
 CONFIG = init_defaults('todo')
@@ -42,7 +43,8 @@ class RiotCli(App):
 
         # register handlers
         handlers = [
-            Base
+            Base,
+            Config
         ]
 
 

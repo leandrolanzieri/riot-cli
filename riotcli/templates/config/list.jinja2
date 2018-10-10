@@ -1,0 +1,39 @@
+{%- if parameters -%}
+================================================================================
+These are the available parameters
+================================================================================
+{%- if verbose -%}
+{%- set group = namespace(name=false) -%} {# namespace to store group name #}
+{%- for parameter in parameters recursive -%}
+{%- if parameter.group %}
+{%- set group.name = parameter.group.name %}
+--------------------------------------------------------------------------------
+[Group: {{ parameter.group.name }}]
+    {{- loop(parameter.group.parameters) }}
+{%- else %}
+
+Parameter: {%- if group.name -%}{{ group.name }}.{%- endif -%}{{ parameter.name }}
+    {%- if parameter.description %}
+    Description: {{ parameter.description }}
+    {%- endif -%}
+{%- endif -%}
+{%- if loop.last -%} {%- set group.name = '' -%} {%- endif -%}
+{%- endfor -%} {# end parameters #}
+
+{%- else %} {# if not verbose #}
+
+{%- set group = namespace(name=false) -%} {# namespace to store group name #}
+{% for parameter in parameters recursive -%}
+{%- if parameter.group -%}
+{%- set group.name = parameter.group.name -%}
+{{ loop(parameter.group.parameters) }}
+{%- else -%}
+{%- if group.name -%}{{ group.name }}.{%- endif -%}{{ parameter.name }}
+{% endif %}
+{%- if loop.last -%} {%- set group.name = '' -%} {%- endif -%}
+{%- endfor -%} {# end parameters #}
+
+{%- endif -%} {# end verbose #}
+{%- else -%}
+No parameters were found
+{%- endif %}
